@@ -41,13 +41,22 @@ impl FromStr for KeyType {
 
 /// Level of detail to show for key.
 #[derive(
-	Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, ValueEnum,
+	Clone,
+	Copy,
+	Debug,
+	Default,
+	PartialEq,
+	Eq,
+	Serialize,
+	Deserialize,
+	ValueEnum,
 )]
 #[serde(rename_all = "snake_case")]
 #[clap(rename_all = "snake_case")]
 pub enum KeyDetail {
 	/// Show only the primary key and user ID.
 	#[clap(aliases = ["min", "1"])]
+	#[default]
 	Minimum = 0,
 	/// Show all subkeys and user IDs.
 	#[clap(alias = "2")]
@@ -55,12 +64,6 @@ pub enum KeyDetail {
 	/// Show signatures.
 	#[clap(alias = "3")]
 	Full = 2,
-}
-
-impl Default for KeyDetail {
-	fn default() -> Self {
-		Self::Minimum
-	}
 }
 
 impl Display for KeyDetail {

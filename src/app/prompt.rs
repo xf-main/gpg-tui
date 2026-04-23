@@ -11,9 +11,10 @@ pub const COMMAND_PREFIX: char = ':';
 pub const SEARCH_PREFIX: char = '/';
 
 /// Output type of the prompt.
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, Default)]
 pub enum OutputType {
 	/// No output.
+	#[default]
 	None,
 	/// Successful execution.
 	Success,
@@ -23,12 +24,6 @@ pub enum OutputType {
 	Failure,
 	/// Performed an action (such as changing the mode).
 	Action,
-}
-
-impl Default for OutputType {
-	fn default() -> Self {
-		Self::None
-	}
 }
 
 impl Display for OutputType {

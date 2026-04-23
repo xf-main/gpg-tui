@@ -125,12 +125,8 @@ impl<T: Clone> StatefulTable<T> {
 	pub fn scroll_row(&mut self, direction: ScrollDirection) {
 		match direction {
 			ScrollDirection::Up(value) => {
-				self.state.scroll.vertical = self
-					.state
-					.scroll
-					.vertical
-					.checked_sub(value)
-					.unwrap_or_default();
+				self.state.scroll.vertical =
+					self.state.scroll.vertical.saturating_sub(value);
 			}
 			ScrollDirection::Right(value) => {
 				self.state.scroll.horizontal = self
@@ -149,12 +145,8 @@ impl<T: Clone> StatefulTable<T> {
 					.unwrap_or(self.state.scroll.vertical)
 			}
 			ScrollDirection::Left(value) => {
-				self.state.scroll.horizontal = self
-					.state
-					.scroll
-					.horizontal
-					.checked_sub(value)
-					.unwrap_or_default();
+				self.state.scroll.horizontal =
+					self.state.scroll.horizontal.saturating_sub(value);
 			}
 			_ => {}
 		}

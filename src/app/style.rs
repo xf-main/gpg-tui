@@ -4,18 +4,13 @@ use ratatui::text::{Line, Span, Text};
 use std::fmt::{Display, Formatter, Result as FmtResult};
 
 /// Application style.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, ValueEnum)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, ValueEnum)]
 pub enum Style {
 	/// Plain style with basic colors.
+	#[default]
 	Plain,
 	/// More rich style with highlighted widgets and more colors.
 	Colored,
-}
-
-impl Default for Style {
-	fn default() -> Self {
-		Self::Plain
-	}
 }
 
 impl Display for Style {

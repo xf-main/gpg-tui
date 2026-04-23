@@ -568,11 +568,7 @@ impl<'a> App<'a> {
 				ScrollDirection::Bottom => {
 					if self.state.show_options {
 						self.options.state.select(Some(
-							self.options
-								.items
-								.len()
-								.checked_sub(1)
-								.unwrap_or_default(),
+							self.options.items.len().saturating_sub(1),
 						));
 						show_options = true;
 					} else if Tab::Help == self.tab {
@@ -581,11 +577,7 @@ impl<'a> App<'a> {
 							.select(Some(KEY_BINDINGS.len() - 1));
 					} else {
 						self.keys_table.state.tui.select(Some(
-							self.keys_table
-								.items
-								.len()
-								.checked_sub(1)
-								.unwrap_or_default(),
+							self.keys_table.items.len().saturating_sub(1),
 						));
 					}
 				}

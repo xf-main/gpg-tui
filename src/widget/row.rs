@@ -70,13 +70,9 @@ impl RowItem {
 		let mut item = Self {
 			max_width,
 			max_height,
-			height_overflow: (data
-				.len()
-				.checked_sub(max_height.into())
-				.unwrap_or_default()
-				+ 1)
-			.try_into()
-			.unwrap_or_default(),
+			height_overflow: (data.len().saturating_sub(max_height.into()) + 1)
+				.try_into()
+				.unwrap_or_default(),
 			scroll,
 			data,
 		};

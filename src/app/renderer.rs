@@ -210,10 +210,7 @@ fn render_help_tab(app: &mut App, frame: &mut Frame, rect: Rect) {
 			.constraints(
 				[
 					Constraint::Min(
-						chunks[0]
-							.height
-							.checked_sub(description_height)
-							.unwrap_or_default(),
+						chunks[0].height.saturating_sub(description_height),
 					),
 					Constraint::Min(description_height),
 				]
@@ -277,10 +274,7 @@ fn render_help_tab(app: &mut App, frame: &mut Frame, rect: Rect) {
 			.constraints(
 				[
 					Constraint::Min(
-						chunks[1]
-							.height
-							.checked_sub(information_height)
-							.unwrap_or_default(),
+						chunks[1].height.saturating_sub(information_height),
 					),
 					Constraint::Min(information_height),
 				]
@@ -347,24 +341,21 @@ fn render_options_menu(app: &mut App, frame: &mut Frame, rect: Rect) {
 			.as_ref(),
 		)
 		.split(rect);
-	let area =
-		Layout::default()
-			.direction(Direction::Horizontal)
-			.constraints(
-				[
-					Constraint::Length(
-						(popup_layout[1].width.checked_sub(length_x))
-							.unwrap_or_default() / 2,
-					),
-					Constraint::Min(length_x),
-					Constraint::Length(
-						(popup_layout[1].width.checked_sub(length_x))
-							.unwrap_or_default() / 2,
-					),
-				]
-				.as_ref(),
-			)
-			.split(popup_layout[1])[1];
+	let area = Layout::default()
+		.direction(Direction::Horizontal)
+		.constraints(
+			[
+				Constraint::Length(
+					popup_layout[1].width.saturating_sub(length_x) / 2,
+				),
+				Constraint::Min(length_x),
+				Constraint::Length(
+					popup_layout[1].width.saturating_sub(length_x) / 2,
+				),
+			]
+			.as_ref(),
+		)
+		.split(popup_layout[1])[1];
 	frame.render_widget(Clear, area);
 	frame.render_stateful_widget(
 		List::new(items)

@@ -101,10 +101,8 @@ fn handle_key_event(
 			command = logger_command;
 		} else {
 			match key_event.code {
-				Key::Char('l') => {
-					if key_event.modifiers == Modifiers::CONTROL {
-						command = Command::Logs;
-					}
+				Key::Char('l') if key_event.modifiers == Modifiers::CONTROL => {
+					command = Command::Logs;
 				}
 				Key::F(2) => {
 					command = Command::Logs;
